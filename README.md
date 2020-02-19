@@ -3,13 +3,19 @@ Windows GKE is a powershell module I created to enable the faster deployment of 
 Currently the module contains two functions which are:
 - new-windowsgkecluster
 - new-windowsgkenodepool
+As you would expect the module is dependant on the underlying googlecloud and googlecloudbeta modules that Google supply.
 
 # new-windowsgkecluster
 The new-windowsgkecluster function is used to provision a regionally (as opposed to zonally) based GKE cluster with the required controller to support Windows node pools.
 
 The function accepts the following parameters:
 - clustername (string) - The name of the GKE cluster you wish to create.
-- region (string) - The region in which you want to create the GKE cluster, the default value for this is europe-west-1 (Belgium) if not specified.
+- region (string) - The region in which you want to create the GKE cluster, the default value for this is europe-west1 (Belgium) if not specified.
+
+Example:
+```
+new-windows-gkecluster -clustername "test" -region "us-central1"
+```
 
 # new-windowsgkenodepool
 The new-windowsgkenodepool function is used to provision a Windows node pool within a cluster created with the new-windowsgkecluster command.
@@ -20,3 +26,13 @@ The function accepts the following parameters:
 - nodeimagetype (string) - The type of Windows image to use, the choices are either WINDOWS_SAC (Semi-Annual Channel) or WINDOWS_LTSC (Long Term Servicing Channel) with the former option set as the default if not specified.
 - nodesize (string) - The GCE instance size you wish to use for the nodes, for Windows nodes this needs to be at least n1-standard-2 which is set as the default value if not specified.
 - nodenumber (int16) - The number of nodes per zone, the minimum and default value is 1 (leading to 3 nodes in a region).
+
+Example with minimal parameters:
+```
+new-windows-gkecluster -nodepoolname "winpool" -clustername "test"
+```
+
+Example with all parameters:
+```
+new-windowsgkenodepool -nodepoolname "windowspool" -clustername "test" -nodeimagetype "WINDOWS_LTSC" -nodesize "n1-standard-4" -nodenumber 2
+```
