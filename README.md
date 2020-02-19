@@ -3,7 +3,8 @@ Windows GKE is a powershell module I created to enable the faster deployment of 
 Currently the module contains two functions which are:
 - new-windowsgkecluster
 - new-windowsgkenodepool
-As you would expect the module is dependant on the underlying googlecloud and googlecloudbeta modules that Google supply.
+
+As you would expect the module is dependant on the underlying googlecloud and googlecloudbeta modules that Google supply. This code also assumes that you have already configured the gcloud config using the instructions [here](https://cloud.google.com/sdk/gcloud/reference/config/set).
 
 ## new-windowsgkecluster
 The new-windowsgkecluster function is used to provision a regionally (as opposed to zonally) based GKE cluster with the required controller to support Windows node pools.
