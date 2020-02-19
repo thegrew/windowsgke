@@ -5,7 +5,7 @@ Currently the module contains two functions which are:
 - new-windowsgkenodepool
 As you would expect the module is dependant on the underlying googlecloud and googlecloudbeta modules that Google supply.
 
-# new-windowsgkecluster
+## new-windowsgkecluster
 The new-windowsgkecluster function is used to provision a regionally (as opposed to zonally) based GKE cluster with the required controller to support Windows node pools.
 
 The function accepts the following parameters:
@@ -17,7 +17,7 @@ Example:
 new-windows-gkecluster -clustername "test" -region "us-central1"
 ```
 
-# new-windowsgkenodepool
+## new-windowsgkenodepool
 The new-windowsgkenodepool function is used to provision a Windows node pool within a cluster created with the new-windowsgkecluster command.
 
 The function accepts the following parameters:
