@@ -1,8 +1,9 @@
 # windowsgke
 Windows GKE is a powershell module I created to enable the faster deployment of Windows GKE clusters.
-Currently the module contains two functions which are:
+Currently the module contains three functions which are:
 - new-windowsgkecluster
 - new-windowsgkenodepool
+- remove-windowsgkenodepool
 
 As you would expect the module is dependant on the underlying googlecloud and googlecloudbeta modules that Google supply. This code also assumes that you have already configured the gcloud config using the instructions [here](https://cloud.google.com/sdk/gcloud/reference/config/set).
 
@@ -15,7 +16,7 @@ The function accepts the following parameters:
 
 Example:
 ```
-new-windows-gkecluster -clustername "test" -region "us-central1"
+new-windowsgkecluster -clustername "test" -region "us-central1"
 ```
 
 ## new-windowsgkenodepool
@@ -30,10 +31,27 @@ The function accepts the following parameters:
 
 Example with minimal parameters:
 ```
-new-windows-gkecluster -nodepoolname "winpool" -clustername "test"
+new-windowsgkenodepool -nodepoolname "winpool" -clustername "test"
 ```
 
 Example with all parameters:
 ```
 new-windowsgkenodepool -nodepoolname "windowspool" -clustername "test" -nodeimagetype "WINDOWS_LTSC" -nodesize "n1-standard-4" -nodenumber 2
+```
+
+## remove-windowsgkenodepool
+The new-windowsgkenodepool function is used to remove a Windows node pool within a GKE cluster.
+
+The function accepts the following parameters:
+- clustername (string) - The name of the cluster in the node pool resides, this is a required value.
+- nodepoolname (string) - The name of the pool you wish to remove, if this isn't initially provided the function will list all node pools attached to the cluster to select from.
+
+Example with minimal parameters:
+```
+remove-windowsgkenodepool -clustername "test"
+```
+
+Example with all parameters:
+```
+remove-windowsgkenodepool -clustername "test" -nodepoolname "windowspool"
 ```
